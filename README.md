@@ -1,12 +1,12 @@
-SapiensNB (Naive Bayes) is a classification algorithm that returns a probabilistic result based on Bayes Theorem.
+SapiensNB ([Naive Bayes](https://en.wikipedia.org/wiki/Naive_Bayes_classifier)) is a classification algorithm that returns a probabilistic result based on Bayes Theorem.
 
 # SapiensNB
 
-The SapiensNB or Sapiens for Naive Bayes is a Machine Learning algorithm focused on probabilistic data classification, where the answer for each input is calculated based on the highest probability of similarity between the prediction input and the training inputs. The probabilistic calculation is based on the following mathematical theorem: P(A/B) = P(B/A) x P(A) / P(B), where P is the probability, A is the class and B are the attributes. This theorem can be applied to both numerical classification and textual classification of data.
+The SapiensNB or Sapiens for [Naive Bayes](https://en.wikipedia.org/wiki/Naive_Bayes_classifier) is a Machine Learning algorithm focused on probabilistic data classification, where the answer for each input is calculated based on the highest probability of similarity between the prediction input and the training inputs. The probabilistic calculation is based on the following mathematical theorem: P(A/B) = P(B/A) x P(A) / P(B), where P is the probability, A is the class and B are the attributes. This theorem can be applied to both numerical classification and textual classification of data.
 
 ## Installation
 
-Use the package manager [pip](https://pip.pypa.io/en/stable/) to install SapiensNB.
+Use the package manager [pip](https://pip.pypa.io/en/stable/) to install [SapiensNB](https://pypi.org/project/sapiensnb/).
 
 ```bash
 pip install sapiensnb
