@@ -30,23 +30,23 @@ for result in results: print(result) # displays predicted results
 # for each entry we will have a dictionary as a response with a key for each possible label containing the probabilistic values of each of them and a final key with the classification of the most likely label
 ```
 ```bash
-{'unit': 0.16666666666666669, 'ten': 0.6666666666666666, 'classify': 'ten'}
+{'unit': 0.16666666666666669, 'ten': 0.8333333333333334, 'classify': 'ten'}
 {'unit': 1.0, 'ten': 0.0, 'classify': 'unit'}
-{'unit': 0.09999999999999998, 'ten': 0.8, 'classify': 'ten'}
+{'unit': 0.09999999999999998, 'ten': 0.9, 'classify': 'ten'}
 {'unit': 1.0, 'ten': 0.0, 'classify': 'unit'}
-{'unit': 0.07142857142857145, 'ten': 0.8571428571428571, 'classify': 'ten'}
+{'unit': 0.07142857142857145, 'ten': 0.9285714285714285, 'classify': 'ten'}
 {'unit': 1.0, 'ten': 0.0, 'classify': 'unit'}
-{'unit': 0.05555555555555558, 'ten': 0.8888888888888888, 'classify': 'ten'}
+{'unit': 0.05555555555555558, 'ten': 0.9444444444444444, 'classify': 'ten'}
 {'unit': 1.0, 'ten': 0.0, 'classify': 'unit'}
-{'unit': 0.04545454545454547, 'ten': 0.9090909090909091, 'classify': 'ten'}
+{'unit': 0.04545454545454547, 'ten': 0.9545454545454545, 'classify': 'ten'}
 {'unit': 1.0, 'ten': 0.0, 'classify': 'unit'}
-{'unit': 0.038461538461538436, 'ten': 0.9230769230769231, 'classify': 'ten'}
+{'unit': 0.038461538461538436, 'ten': 0.9615384615384616, 'classify': 'ten'}
 {'unit': 1.0, 'ten': 0.0, 'classify': 'unit'}
-{'unit': 0.033333333333333326, 'ten': 0.9333333333333333, 'classify': 'ten'}
+{'unit': 0.033333333333333326, 'ten': 0.9666666666666667, 'classify': 'ten'}
 {'unit': 1.0, 'ten': 0.0, 'classify': 'unit'}
-{'unit': 0.02941176470588236, 'ten': 0.9411764705882353, 'classify': 'ten'}
+{'unit': 0.02941176470588236, 'ten': 0.9705882352941176, 'classify': 'ten'}
 {'unit': 1.0, 'ten': 0.0, 'classify': 'unit'}
-{'unit': 0.026315789473684237, 'ten': 0.9473684210526315, 'classify': 'ten'}
+{'unit': 0.026315789473684237, 'ten': 0.9736842105263158, 'classify': 'ten'}
 {'unit': 1.0, 'ten': 0.0, 'classify': 'unit'}
 ```
 ```python
@@ -154,6 +154,51 @@ for result in results: print(result) # displays predicted results
 {0: 0.0, 1: 1.0, 'classify': 1}
 {0: 1.0, 1: 0.0, 'classify': 0}
 ```
+In the constructor parameters you can configure the normalization of the input data so that all columns have the same weight in the final result.
+```python
+from sapiensnb import SapiensNB # module main class import
+sapiensnb = SapiensNB(normalization=True) # normalization equal to True to normalize the data, or normalization equal to False to keep the original entries (default False)
+# model training for learning assimilation
+inputs = [[1, 2], [10, 20], [3, 4], [30, 40], [5, 6], [50, 60], [7, 8], [70, 80]] # two-dimensional matrix with the input examples
+outputs = ['units', 'tens', 'units', 'tens', 'units', 'tens', 'units', 'tens'] # output examples
+sapiensnb.fit(inputs=inputs, outputs=outputs) # training for pattern recognition
+# model execution/prediction phase
+inputs = [[2, 3], [20, 30], [4, 5], [40, 50], [6, 7], [60, 70], [8, 9], [80, 90]] # the inputs to be predicted must have the same dimensionality as the learning inputs
+results = sapiensnb.predict(inputs=inputs) # calling the prediction function that will return the results
+for result in results: print(result) # displays predicted results
+```
+```bash
+{'units': 0.7916666666666666, 'tens': 0.20833333333333331, 'classify': 'units'}
+{'units': 0.20833333333333337, 'tens': 0.7916666666666666, 'classify': 'tens'}
+{'units': 0.8875000000000001, 'tens': 0.11249999999999999, 'classify': 'units'}
+{'units': 0.11249999999999999, 'tens': 0.8875000000000001, 'classify': 'tens'}
+{'units': 0.9226190476190476, 'tens': 0.07738095238095238, 'classify': 'units'}
+{'units': 0.07738095238095238, 'tens': 0.9226190476190476, 'classify': 'tens'}
+{'units': 0.9409722222222222, 'tens': 0.059027777777777735, 'classify': 'units'}
+{'units': 0.05902777777777779, 'tens': 0.9409722222222222, 'classify': 'tens'}
+```
+```python
+from sapiensnb import SapiensNB # module main class import
+sapiensnb = SapiensNB(normalization=False) # normalization equal to True to normalize the data, or normalization equal to False to keep the original entries (default False)
+# model training for learning assimilation
+inputs = [[1, 2], [10, 20], [3, 4], [30, 40], [5, 6], [50, 60], [7, 8], [70, 80]] # two-dimensional matrix with the input examples
+outputs = ['units', 'tens', 'units', 'tens', 'units', 'tens', 'units', 'tens'] # output examples
+sapiensnb.fit(inputs=inputs, outputs=outputs) # training for pattern recognition
+# model execution/prediction phase
+inputs = [[2, 3], [20, 30], [4, 5], [40, 50], [6, 7], [60, 70], [8, 9], [80, 90]] # the inputs to be predicted must have the same dimensionality as the learning inputs
+results = sapiensnb.predict(inputs=inputs) # calling the prediction function that will return the results
+for result in results: print(result) # displays predicted results
+```
+```bash
+{'units': 1.0, 'tens': 0.0, 'classify': 'units'}
+{'units': 0.0, 'tens': 1.0, 'classify': 'tens'}
+{'units': 1.0, 'tens': 0.0, 'classify': 'units'}
+{'units': 0.0, 'tens': 1.0, 'classify': 'tens'}
+{'units': 1.0, 'tens': 0.0, 'classify': 'units'}
+{'units': 0.0, 'tens': 1.0, 'classify': 'tens'}
+{'units': 1.0, 'tens': 0.0, 'classify': 'units'}
+{'units': 0.0, 'tens': 1.0, 'classify': 'tens'}
+```
 To save a pre-trained model you must call the "saveModel" method. This method receives in the parameter called "path" a string with the path and name of the file to be saved. If no value is assigned to the "path" parameter, the file will be saved with a default name.
 ```python
 from sapiensnb import SapiensNB # module main class import
@@ -164,7 +209,7 @@ outputs = ['units', 'tens', 'hundreds', 'units', 'tens', 'hundreds'] # output ex
 sapiensnb.fit(inputs=inputs, outputs=outputs) # training for pattern recognition
 sapiensnb.saveModel(path='my_model') # saves the pre-trained model with the prefix "my_model"
 # in this case the file will be saved in the current directory because no path was defined before the name
-# the file will be saved with the name "my_model-136P.nb", that is, the prefix "my_model" defined in "path", plus the number of model parameters followed by the ".nb" extension
+# the file will be saved with the name "my_model-162P.nb", that is, the prefix "my_model" defined in "path", plus the number of model parameters followed by the ".nb" extension
 # you can rename the saved file to any name you prefer as long as the ".nb" extension is maintained
 ```
 To load a pre-trained model without the need to train it again, simply call the "loadModel" method, which will receive the address and file name of the model to be loaded in the "path" parameter.
@@ -172,7 +217,7 @@ To load a pre-trained model without the need to train it again, simply call the 
 from sapiensnb import SapiensNB # module main class import
 sapiensnb = SapiensNB() # class object instantiation
 # prediction phase or execution phase (application of knowledge)
-sapiensnb.loadModel(path='my_model-136P.nb') # loads the pre-trained model
+sapiensnb.loadModel(path='my_model-162P.nb') # loads the pre-trained model
 inputs = [[2, 3, 4], [20, 30, 40], [200, 300, 400], [3, 4, 5], [30, 40, 50], [300, 400, 500]] # values to be predicted (may be the same or different from the training input values, as long as they respect the same standard)
 results = sapiensnb.predict(inputs=inputs) # calling the prediction function that will return the results
 for result in results: print(result) # displays the prediction result
@@ -209,17 +254,17 @@ from sapiensnb import SapiensNB # module main class import
 sapiensnb = SapiensNB() # class object instantiation
 # learning transfer phase
 sapiensnb.transferLearning( # method for combining learnings
-    transmitter_path='transmitter_model-88P.nb', # model that will transmit learning
-    receiver_path='receiver_model-78P.nb', # model that will receive the learning
+    transmitter_path='transmitter_model-114P.nb', # model that will transmit learning
+    receiver_path='receiver_model-104P.nb', # model that will receive the learning
     rescue_path='complete_model' # model that will be saved with the complete union of learnings
-) # the model will be saved with the name "complete_model-135P.nb"
+) # the model will be saved with the name "complete_model-161P.nb"
 # the final model may have fewer parameters than the sum of the previous parameters because there are some configuration parameters that will be the same and will not need repetition
 ```
 ```python
 from sapiensnb import SapiensNB # module main class import
 sapiensnb = SapiensNB() # class object instantiation
 # prediction phase or execution phase (application of knowledge)
-sapiensnb.loadModel(path='complete_model-135P.nb') # loads the pre-trained model
+sapiensnb.loadModel(path='complete_model-161P.nb') # loads the pre-trained model
 inputs = [[2, 3, 4], [20, 30, 40], [600, 700, 800]] # values to be predicted
 results = sapiensnb.predict(inputs=inputs) # calling the prediction function that will return the results
 for result in results: print(result) # displays the prediction result
@@ -234,7 +279,7 @@ You can use the "test" function to test your model's learning. This function wil
 from sapiensnb import SapiensNB # module main class import
 sapiensnb = SapiensNB() # class object instantiation
 # test phase (testing the level of learning)
-sapiensnb.loadModel(path='complete_model-135P.nb') # loads the pre-trained model
+sapiensnb.loadModel(path='complete_model-161P.nb') # loads the pre-trained model
 inputs = [[2, 3, 4], [20, 30, 40], [200, 300, 400], [3, 4, 5], [30, 40, 50], [300, 400, 500], [4, 5, 6], [40, 50, 60], [400, 500, 600], [5, 6, 7], [50, 60, 70], [500, 600, 700]] # values to be predicted
 outputs = ['units', 'tens', 'hundreds', 'units', 'tens', 'hundreds', 'units', 'tens', 'hundreds', 'units', 'tens', 'hundreds'] # expected values as a response in prediction
 results = sapiensnb.test(inputs=inputs, outputs=outputs) # function call to test learning
@@ -246,6 +291,13 @@ print(results) # displays the test result with the percentage of correct answers
 ```
 
 ## Methods
+### Constructor: SapiensNB
+
+Parameters
+| Name          | Description                       | Type | Default Value |
+|---------------|-----------------------------------|------|---------------|
+| normalization | Enable or disable data normalization | bool | False         |
+
 ### fit: Train the model with input and output examples for pattern recognition
 Parameters
 | Name    | Description                                     | Type  | Default Value |
@@ -318,7 +370,7 @@ print(results) # displays percentage test results
 ```python
 from pandas import read_csv # import csv file reading module with pandas
 from sapiensnb import SapiensNB # import of sapiensnb module main class
-sapiensnb = SapiensNB() # class instantiation
+sapiensnb = SapiensNB(normalization=True) # class instantiation
 # data preparation phase for training and testing
 data_df = read_csv('iris.csv') # reading csv file converted to dataframe
 # selection of input and output lists
@@ -326,8 +378,8 @@ input_columns = ['sepal.length', 'sepal.width', 'petal.length', 'petal.width'] #
 inputs = data_df[input_columns].values.tolist() # reading input column values converted into lists
 outputs = data_df['variety'].values.tolist() # reading the column containing the output labels (the result will be a list with the label values)
 # separation of data between training and testing
-fit_x, fit_y = inputs[:int(len(inputs)*.95)], outputs[:int(len(outputs)*.95)] # separates 95% of input and output data for training
-test_x, test_y = inputs[int(len(inputs)*.95):], outputs[int(len(outputs)*.95):] # separates the remaining 5% of data for testing
+fit_x, fit_y = inputs[:int(len(inputs)*.8)], outputs[:int(len(outputs)*.8)] # separates 80% of input and output data for training
+test_x, test_y = inputs[int(len(inputs)*.8):], outputs[int(len(outputs)*.8):] # separates the remaining 20% of data for testing
 # machine learning model training phase
 sapiensnb.fit(inputs=fit_x, outputs=fit_y) # performs machine learning model training
 sapiensnb.saveModel() # saves the machine learning model
@@ -336,7 +388,7 @@ results = sapiensnb.test(inputs=test_x, outputs=test_y) # tests the learning of 
 print(results) # displays percentage test results
 ```
 ```bash
-{'hits': 0.875, 'errors': 0.125}
+{'hits': 0.8, 'errors': 0.19999999999999996}
 ```
 
 ## Contributing
